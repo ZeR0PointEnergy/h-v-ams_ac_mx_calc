@@ -55,18 +55,6 @@
             left: 270px;  /* 任意の位置に調整 */
             z-index: 10; /* canvasより前面に表示 */
         }
-        fieldset.IndicateAcMx {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 520px;   /* 任意の位置に調整 */
-            left: 480px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        select.AcMxTec {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 500px;   /* 任意の位置に調整 */
-            left: 480px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
         div.BurdenRatio {
             position: absolute; /* コンテナ内で絶対配置 */
             top: 20px;   /* 任意の位置に調整 */
@@ -75,7 +63,7 @@
         }
         #AnswersBodyAnatomy{
             position: absolute; /* コンテナ内で絶対配置 */
-            top: 440px;
+            top: 450px;
             left: 20px;
             z-index: 10; /* canvasより前面に表示 */
         }
@@ -85,15 +73,14 @@
             left: 20px;
             z-index: 10; /* canvasより前面に表示 */
         }
-        #tableArea table {
-            border-collapse: collapse;
-        }
 </style>
 <script src="./h-v-ams_ac_mx_calc.js?"></script>
 <link rel="shortcut icon" href="">
 </head>
 <body>
 <canvas id="BodyAnatomy" width="600" height="800" class="BodyAnatomy"></canvas>
+<br clear="all" />
+<input id="AMS_AC_MX_Mode" type="hidden" value="1" />
 <select name="rightarm" id="limb[0]" class="rightarm">
 <option value="0">なし</option>
 <option value="1">マッサージ</option>
@@ -118,31 +105,13 @@
 <option value="0">なし</option>
 <option value="1">マッサージ</option>
 </select>
-<fieldset name="IndicateAcMx" id="IndicateAcMx">
-<legend>適応症（複数選択）</legend>
-<ul>
-<li><label><input type="checkbox" name="IndicateAcMx" />神経痛</label></li>
-<li><label><input type="checkbox" name="IndicateAcMx" />リウマチ</label></li>
-<li><label><input type="checkbox" name="IndicateAcMx" />五十肩</label></li>
-<li><label><input type="checkbox" name="IndicateAcMx" />頸腕症候群</label></li>
-<li><label><input type="checkbox" name="IndicateAcMx" />腰痛症</label></li>
-<li><label><input type="checkbox" name="IndicateAcMx" />頸椎捻挫後遺症</label></li>
-<li><label text="医師の同意書に記載された慢性疼痛等"><input type="checkbox" name="IndicateAcMx" />その他</label></li>
-</ul>
-</fieldset>
-<select name="AcMxTec" id="AcMxTec" class="AcMxTec">
-<option value="0">なし</option>
-<option value="1">鍼きゅう１術</option>
-<option value="2">鍼きゅう２術</option>
-</select>
 <div class="BurdenRatio">
 保険負担割合:<select name="BurdenRatio" id="BurdenRatio">
 <option value="1">１割</option>
 <option value="2">２割</option>
 <option value="3">３割</option>
 <option value="10">保険なし</option>
-</select>
-負担で<input type="button" value="計算！" id="HomeVisitedOfMassage" onclick="runBodyAnatomyCalc();">
+</select>負担で<input type="button" value="計算！" id="HomeVisitedOfMassage" onclick="runBodyAnatomyCalc();">
 <br />
 同一住所のご利用者人数:<select name="HeadCount" id="HeadCount">
 <option value="1">ご自宅</option>
@@ -153,25 +122,18 @@
 <option value="0">往診料含まない</option>
 </select>
 <ul>
-<li>あんまマッサージ指圧
-<ul>
-<li>痛みやしびれで「マッサージ」希望部位を選ぶ
+<li>痛みやしびれ（神経痛を含）で「マッサージ」して欲しい部位を選ぶ
 <li>拘縮や筋麻痺もある場合は「変形徒手矯正」を選ぶ
 <li>肩・股関節を挟む各肢は体躯のを「マッサージ」も追加
-</ul>
-<li>はり＆きゅう
 <li>医療保険の保険負担割合を選ぶ
 <li>[計算]ボタンを押す
 </ul>
 </div>
-<div id="AnswersBodyAnatomy">施術料<br />
+<div id="AnswersBodyAnatomy">あんまマッサージ指圧<br />
 </div>
 <div id="tableArea"></div>
 </body>
 <script type="text/javascript"><!--
-window.onload = function() {
-    updateTecState();
-}
 const canvas = document.getElementById('BodyAnatomy');
 const ctx = canvas.getContext('2d');
 const img = new Image();

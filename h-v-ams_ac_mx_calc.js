@@ -19,11 +19,13 @@ const UnitPrice = Object.freeze({
 
 const HtmlId = Object.freeze({
     Mode        : "AMS_AC_MX_Mode",
+    AcMxTec     : "AcMxTec",
+    IndicateAcMx: "IndicateAcMx",
     HeadCount   : "HeadCount",
     BurdenRatio : "BurdenRatio",
     Answer      : "AnswersBodyAnatomy",
     tableArea   : "tableArea",
-    TotalTable : "TotalFeeTable"
+    TotalTable  : "TotalFeeTable"
 });
 
 function getCalcMode() {
@@ -69,29 +71,29 @@ const RowType = Object.freeze({
 
 const SpecialRows = Object.freeze({
     [RowType.HOTPACK]: {
-        title : "温罨法",
-        price : UnitPrice.HotPack,
-        note : "（変形徒手矯正併用不可） +"
+        Title : "温罨法",
+        Price : UnitPrice.HotPack,
+        Note : "（変形徒手矯正併用不可） +"
     },
     [RowType.ELEHOTPACK]: {
-        title : "電気温罨法",
-        price : UnitPrice.EleHotPack,
-        note : "（変形徒手矯正併用不可） +"
+        Title : "電気温罨法",
+        Price : UnitPrice.EleHotPack,
+        Note : "（変形徒手矯正併用不可） +"
     },
     [RowType.ACMX1]: {
-        title : "鍼きゅう１術",
-        price : UnitPrice.AandM1tec,
-        note : ""
+        Title : "鍼きゅう１術",
+        Price : UnitPrice.AandM1tec,
+        Note : ""
     },
     [RowType.ACMX2]: {
-        title : "鍼きゅう２術",
-        price : UnitPrice.AandM2tec,
-        note : ""
+        Title : "鍼きゅう２術",
+        Price : UnitPrice.AandM2tec,
+        Note : ""
     },
     [RowType.ELEACMX]: {
-        title : "電療料",
-        price : UnitPrice.EleAandM,
-        note : ""
+        Title : "電療料",
+        Price : UnitPrice.EleAandM,
+        Note : ""
     }
 });
 
@@ -111,26 +113,14 @@ function getSelectedCell(arrLimb)
     };
 }
 
-function OnSitePrice(){
+function OnSitePrice(arrLimb = null){
+    const cMode = getCalcMode();
 
-}
-
-function AMSPrice(arrLimb){
-    let Price = 0;
-    if (arrLimb[0] === 0 && arrLimb[1] === 0 && arrLimb[2] === 0 && arrLimb[3] === 0 && arrLimb[4] === 0)
-        return 0;
-    else if (!isValidLimb(arrLimb))
-        return -1;
-    else {
-        for (let iCount=0; iCount<5 ;iCount++){
-            if (arrLimb[iCount]===3) {
-                Price = Price + UnitPrice.Massage + UnitPrice.MCorrection ;
-            } else if (arrLimb[iCount]===1) {
-                Price = Price + UnitPrice.Massage ;
-            }
-        }
+    if (cMode.ModeMin === 0) {
+        return AMSPrice(arrLimb);
     }
-    return Price;
+
+    return ACMXPrice(ACMXtec());
 }
 
 function CalcRatio(argPrice, BurdenRatio) {
@@ -150,15 +140,66 @@ function isValidLimb(arrLimb)
     return correctionCount <= 4;
 }
 
-function AMS_Total(arrLimb){
-    let Price = AMSPrice(arrLimb);
-    return CalcRatio(( Price + UnitPrice.MedExp[HeadCount] ), BurdenRatio);
+function AMSCountParts(){
+    let arrLimb = Array(5).fill(0);
+    // スクリプトでも加工しやすい limb[0] ～ limb[4] までの id を 
+    // <select id="limb[X]"> に埋め込む
+    // Value値 0 : なし
+    //         1 : マッサージ
+    //         3 : 変形徒手矯正 (3=1+2)
+    for (let iCount = 0; iCount<5; iCount++ ) {
+        arrLimb[iCount] = Number(document.getElementById('limb['+iCount+']').value);
+    }
+    return arrLimb;
+}
+function AMSPrice(arrLimb){
+    let Price = 0;
+    if (arrLimb[0] === 0 && arrLimb[1] === 0 && arrLimb[2] === 0 && arrLimb[3] === 0 && arrLimb[4] === 0)
+        return 0;
+    else if (!isValidLimb(arrLimb))
+        return -1;
+    else {
+        for (let iCount=0; iCount<5 ;iCount++){
+            if (arrLimb[iCount]===3) {
+                Price = Price + UnitPrice.Massage + UnitPrice.MCorrection ;
+            } else if (arrLimb[iCount]===1) {
+                Price = Price + UnitPrice.Massage ;
+            }
+        }
+    }
+    return Price;
 }
 
-function OnSiteTotal(BurdenRatio, HeadCount){
-    let AMSPrice = AMSPrice(arrLimb);
+function updateTecState() {
+    const tec = document.getElementById(HtmlId.AcMxTec);
+    tec.disabled = !ACMXHasIndication();
+}
 
+function ACMXHasIndication() {
+    return document.querySelectorAll(
+        'input[name="IndicateAcMx"]:checked'
+    ).length > 0;
+}
 
+function ACMXtec(){
+    if (!ACMXHasIndication())
+        return 0;
+
+    return Number(document.getElementById(HtmlId.AcMxTec).value);
+}
+
+function ACMXPrice(argTecs){
+    if(argTecs === 1)
+        return SpecialRows[RowType.ACMX1].Price;
+    if(argTecs === 2)
+        return SpecialRows[RowType.ACMX2].Price;
+    else
+        return 0;
+}
+
+function OnSiteTotal(argPrice, BurdenRatio, HeadCount){
+    let Price = 0;
+    return CalcRatio(( argPrice + UnitPrice.MedExp[HeadCount] ), BurdenRatio);
 }
 
 function InnerHTMLwritePrice(arrLimb,arrElementById){
@@ -166,28 +207,46 @@ function InnerHTMLwritePrice(arrLimb,arrElementById){
     divarrElementById.innerHTML= OnSitePrice(arrLimb);
 }
 
+function getTreatmentFee() {
+    const cMode = getCalcMode();
+
+    let arrLimb = null;
+    let Price = 0;
+
+    if (cMode.ModeMin === 0) {
+        arrLimb = AMSCountParts();
+        Price = AMSPrice(arrLimb);
+
+        if (cMode.ModeMax === 10) {
+            Price += ACMXPrice(ACMXtec());
+        }
+    } else {
+        if (ACMXHasIndication()) {
+            Price = ACMXPrice(ACMXtec());
+        }
+    }
+
+    return {
+        Price,
+        arrLimb
+    };
+}
+
 function runBodyAnatomyCalc(){
-    let limb = Array(5).fill(0);
     let Price = 0;
     let BurdenRatio = 1;
     let divAnswersBodyAnatomy = document.getElementById(HtmlId.Answer);
-    let cMode = getCalcMode();
-
-    switch 
-
-    // スクリプトでも加工しやすい limb[0] ～ limb[4] までの id を 
-    // <select id="limb[X]"> に埋め込む
-    // Value値 0 : なし
-    //         1 : マッサージ
-    //         3 : 変形徒手矯正 (3=1+2)
-    for (let iCount = 0; iCount<5; iCount++ ) {
-        limb[iCount] = Number(document.getElementById('limb['+iCount+']').value);
-    }
     const HeadCount = Number(document.getElementById(HtmlId.HeadCount).value);
+    const Treatment = getTreatmentFee();
     BurdenRatio = Number(document.getElementById(HtmlId.BurdenRatio).value) / 10;
-    Price = OnSiteTotal(limb, BurdenRatio, HeadCount);
+    
+    if (Treatment.Price > 0) {
+        Price = OnSiteTotal(Treatment.Price, BurdenRatio, HeadCount);
+    } else {
+        Price = 0;
+    }
     divAnswersBodyAnatomy.innerHTML= "施術料(含訪問施術料)" + Price + "円/１回";
-    drawTable(BurdenRatio, limb);
+    drawTable(BurdenRatio, Treatment.arrLimb);
 }
 
 function runDrawTableCalc(){
@@ -199,19 +258,15 @@ function getRowTitle(argIndex) {
     if (argIndex === 0) {
         return "マッサージ部位数";
     }
-
     if (argIndex === 1) {
         return "マッサージのみ";
     }
-
     if (argIndex < RowType.HOTPACK) {
         return `変形徒手 ${argIndex - 1}部位`;
     }
-
     if (SpecialRows[argIndex]) {
-        return SpecialRows[argIndex].title;
+        return SpecialRows[argIndex].Title;
     }
-
     return "";
 }
 
@@ -263,7 +318,7 @@ function drawTable(BurdenRatio, arrLimb = null) {
             } else if (rowInfo) { // ( yCount >= RowType.HOTPACK && yCount <= RowType.ELEACMX )
                 cell = document.createElement("td");
                 cell.colSpan = "5";
-                strCell = rowInfo.note + CalcRatio(rowInfo.price, BurdenRatio);
+                strCell = rowInfo.Note + CalcRatio(rowInfo.Price, BurdenRatio);
                 cellText = document.createTextNode(strCell);
                 cell.style.textAlign = "right";
                 cell.appendChild(cellText);
