@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./demo.css">
+<script src="./h-v-ams_ac_mx_calc.js?v=1.0.0.2026.07.05"></script>
+<script src="./h-v-ams_ac_mx_ui.js?v=1.0.0.2026.07.05"></script>
+<script src="./demo.js?v=1.0.0.2026.07.05"></script>
+<link rel="shortcut icon" href="">
+</head>
+<body>
+<canvas id="BodyAnatomy" width="600" height="800" class="BodyAnatomy"></canvas>
+<script src="./canvas.js?v=1.0.0.2026.07.05"></script>
+<div id="amsArea"></div>
+<div id="acmxArea"></div>
+<div class="BurdenRatio">
+保険負担割合:<select name="BurdenRatio" id="BurdenRatio">
+<option value="1">１割</option>
+<option value="2">２割</option>
+<option value="3">３割</option>
+<option value="10">全額(10割)</option>
+</select>
+<br />
+同一住所のご利用者人数:<select name="HeadCount" id="HeadCount">
+<option value="1">ご自宅</option>
+<option value="1">１人</option>
+<option value="2">２人</option>
+<option value="3">３～９人</option>
+<option value="10">１０～１９人</option>
+<option value="20">２０人以上</option>
+<option value="0">往診料含まない</option>
+</select>
+<select id="RunFunction">
+    <option value="runCalculator">runCalculator()</option>
+    <option value="runOnSiteCalc">runOnSiteCalc()</option>
+    <option value="runDrawTableCalc">runDrawTableCalc()</option>
+</select>
+<button id="RunButton">計算</button>
+<br />
+<ul>
+<li>あんまマッサージ指圧
+<ul>
+<li>痛みやしびれで「マッサージ」希望部位を選ぶ
+<li>拘縮や筋麻痺もある場合は「変形徒手矯正」を選ぶ
+<li>肩・股関節を挟む各肢は体躯のを「マッサージ」も追加を推奨
+</ul>
+<li>はり＆きゅう
+<ul>
+<li>鍼灸の適応症を選択する（複数可）
+<li>「その他」は医師の同意書に記載された慢性疼痛等
+<li>１術は鍼灸何れか、２術は両方（希望がかなわない場合もあり）
+</ul>
+<li>医療保険の保険負担割合を選ぶ
+<li>[計算]ボタンを押す
+</ul>
+</div>
+<select id="AMS_AC_MX_Mode">
+<option value="0">マッサージ+はり+きゅう</option>
+<option value="1">マッサージ</option>
+<option value="2">はり+きゅう</option>
+</select>
+<div id="AnswersBodyAnatomy">施術料<br />
+</div>
+<div id="tableArea"></div>
+&copy; 2026 Genjiro SAKAMAKI at Sorahara-Do
+</body>
+</html>
