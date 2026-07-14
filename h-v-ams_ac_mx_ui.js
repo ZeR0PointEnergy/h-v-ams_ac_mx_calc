@@ -1,9 +1,12 @@
 /* 
  * Home Visit AmmaMassageShiatsu & ACupuncture & MoXibustion Calculator 
- * Practitioner-Led Stewardship License (PLSL)
- * Version 1.0
- * Copyright 2026 Genjiro SAKAMAKI at Sorahara-Do
+ * Developed to support licensed practitioners and related organizations.
+ * Licensed under the Practitioner-Led Stewardship License (PLSL) Version 1.0.
+ *
+ * Copyright (c) 2025-2026 Genjiro SAKAMAKI
+ * See LICENSE for details.
  */
+
 {
     const HV_AMSACMX = window.HV_AMSACMX ??= {};
     
@@ -18,28 +21,24 @@
     HV_AMSACMX.modules ??= {};
     
     HV_AMSACMX.modules.ui = Object.freeze({
-        version: "1.0.0"
+        version : "1.0.0",
+        revision: "2026.07",
+        api: Object.freeze({
+           runModeUI
+        })
     });
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    document
-        .querySelectorAll(`input[name="${HtmlId.IndicateAcMx}"]`)
-        .forEach(cb =>
-            cb.addEventListener("change", updateACMXTecState)
-        );
-
-    updateACMXTecState();
-});
+// 手書きHTMLで checkbox が記述されている場合でも初期化できるよう対応
+document.addEventListener("DOMContentLoaded", initUI);
 
 const LimbInfo = Object.freeze([
     { key: "rightUpperLimb", label: "右上肢", correction: true },
     { key: "leftUpperLimb",  label: "左上肢", correction: true },
     { key: "rightLowerLimb", label: "右下肢", correction: true },
     { key: "leftLowerLimb",  label: "左下肢", correction: true },
-    { key: "bodyTrunk",      label: "体幹",   correction: false }
+    { key: "bodyTrunk",      label: "体躯",   correction: false }
 ]);
 
 const LimbTechnique = Object.freeze({
@@ -64,35 +63,73 @@ const ACMXIndicateCase = Object.freeze([
     { label: "その他", title: "医師の同意書に記載された慢性疼痛等" }
 ]);
 
+// <input id="AMS_AC_MX_Mode" ... data-autoform="true">
+function initializeAutoForm() {
+    const cMode = getCalcMode();
+
+    if (!cMode.autoForm)
+        return;
+
+    runModeUI();
+}
+
+// <input id="AMS_AC_MX_Mode" ... data-autotable="true">
+function initializeAutoTable() {
+    const cMode = getCalcMode();
+
+    if (!cMode.autoTable)
+        return;
+
+    runDrawTableCalc();
+}
+
+// autoForm と autoTable をまとめて初期化
+function initializeAutoUI() {
+    initializeAutoForm();
+    initializeAutoTable();
+}
+
+function initUI() {
+    if (HV_AMSACMX.config.debug) console.log("initUI");
+    initializeAutoUI();
+    bindModeChange();
+    bindAutoTable();
+
+    document
+        .querySelectorAll(`input[name="${HtmlId.IndicateAcMx}"]`)
+        .forEach(cb =>
+            cb.addEventListener("change", updateACMXTecState)
+        );
+
+    updateACMXTecState();
+
+}
+
+/*
+ * １術２術セレクターを
+ * 「適用症状」のチェックがない場合＝calc.js:ACMXHasIndication()
+ * ロックする
+ */
 function updateACMXTecState() {
-    const tec = document.getElementById(HtmlId.AcMxTec);
-    if (!tec) {
+    const objAcMxTec = document.getElementById(HtmlId.AcMxTec);
+    if (!objAcMxTec) {
         return;
     }
-    tec.disabled = !ACMXHasIndication();
+    objAcMxTec.disabled = !ACMXHasIndication();
 }
 
-function updateModeUI()
-{
-    switch(getMode())
-    {
-        case MODE_ALL:
-            break;
-
-        case MODE_MASSAGE:
-            break;
-
-        case MODE_ACMX:
-            break;
-    }
-}
-
+/*
+ * HTML:
+ * <div id="amsArea"></div>
+ * id="amsArea"のタグを基準に
+ * あん摩マッサージ指圧の5部位<select>を描く
+ */
 function createAMSUI()
 {
     const amsArea = document.getElementById(HtmlId.amsArea);
     if (!amsArea) {
         console.error("amsArea not found.");
-        return 0;
+        return;
     }
     for (const [nIndex, limb] of LimbInfo.entries()) {
         const objLabel = document.createElement("label");
@@ -116,6 +153,12 @@ function createAMSUI()
     }
 }
 
+/*
+ * HTML:
+ * <div id="acmxArea"></div>
+ * id="acmxArea"のタグを基準に
+ * はりきゅうの適用症状を<fieldest>内に<label><input type="checkbox">で列記
+ */
 function createAcMxUI()
 {
     const acmxArea = document.getElementById(HtmlId.acmxArea);
@@ -139,11 +182,6 @@ function createAcMxUI()
         const objCheckBox = document.createElement("input");
         objCheckBox.type = "checkbox";
         objCheckBox.name = HtmlId.IndicateAcMx;
-
-        objCheckBox.addEventListener(
-            "change",
-            updateACMXTecState
-        );
 
         if (indicate.title) {
             objLabel.title = indicate.title;
@@ -176,6 +214,9 @@ function createAcMxUI()
     objFieldset.appendChild(objSelect);
     acmxArea.appendChild(objFieldset);
 
+/*
+ * 描画時のチェックボックス監視
+ */
     objFieldset
         .querySelectorAll(`input[name="${HtmlId.IndicateAcMx}"]`)
         .forEach(cb =>
@@ -193,49 +234,75 @@ function clearAcMxUI() {
     document.getElementById(HtmlId.acmxArea)?.replaceChildren();
 }
 
-function clearTable() {
-    document.getElementById(HtmlId.tableArea)?.replaceChildren();
-}
-
 function clearUI() {
     clearAMSUI();
-    clearAcMxUI() 
+    clearAcMxUI();
     clearTable();
+    clearAnswer();
 }
 
 function bindModeChange() {
-    const mode = document.getElementById("AMS_AC_MX_Mode");
-    if (!mode) return;
+    const modeElement  = document.getElementById(HtmlId.Mode);
+    if (!modeElement ) return;
 
-    mode.addEventListener("change", () => {
-        applyModeUI();
+    modeElement.addEventListener("change", () => {
+        const cMode = getCalcMode();
+        if (HV_AMSACMX.config.debug) console.log("bindModeChange");
+        if (cMode.autoForm) runModeUI();
     });
-
-    applyModeUI(); // 初期描画
 }
 
-function applyModeUI() {
-    const mode = Number(document.getElementById("AMS_AC_MX_Mode").value);
+function bindAutoTable()
+{
+    const cMode = getCalcMode();
 
-    const amsArea = document.getElementById("amsArea");
-    const acmxArea = document.getElementById("acmxArea");
+    if (!cMode.autoTable)
+        return;
+
+    const objBurdenRatio =
+        document.getElementById(HtmlId.BurdenRatio);
+
+    if (!objBurdenRatio)
+        return;
+
+    objBurdenRatio.addEventListener(
+        "change",
+        runDrawTableCalc
+    );
+}
+
+/*
+ * AMS_AC_MX_Mode の値に従ってUIを更新する。
+ *
+ * 現在の入力フォームを破棄し、
+ * 指定されたモードのフォームを再描画する。
+ *
+ * data-autotable="true" が指定されている場合は、
+ * 料金一覧表もあわせて再描画する。
+ */
+function runModeUI() {
+    const cMode = getCalcMode();
 
     // 一旦リセット
-    clearAMSUI();
-    clearAcMxUI();
+    clearUI();
 
-    switch (mode) {
-        case 0:
+    switch (cMode.tpMode) {
+        case TherapyMode.ALL:
             createAMSUI();
             createAcMxUI();
             break;
 
-        case 1:
+        case TherapyMode.AMS:
             createAMSUI();
             break;
 
-        case 2:
+        case TherapyMode.ACMX:
             createAcMxUI();
             break;
     }
+
+    if (cMode.autoTable) {
+        runDrawTableCalc();
+    }
 }
+

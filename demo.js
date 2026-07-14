@@ -1,12 +1,15 @@
+/* 
+ * デモンストレーション用スクリプト
+ * Copyright 2026 Genjiro SAKAMAKI(Sorahara-Do)
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
-    initUI();
+    initDemoUI();
 });
 
-function bindRunButton() {
+function bindDemoRunButton() {
     document.getElementById("RunButton")
         .addEventListener("click", () => {
-
-
 
             const funcName =
                 document.getElementById("RunFunction").value;
@@ -22,7 +25,10 @@ function bindRunButton() {
         });
 }
 
-function initUI() {
+function initDemoUI() {
+    initializeAutoForm();
+    initializeAutoTable();
     bindModeChange();
-    bindRunButton();
+    bindAutoTable();
+    bindDemoRunButton();
 }

@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>訪問 鍼灸・あん摩マッサージ指圧料金シミュレーター</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- link rel="stylesheet" href="h-v-ams_ac_mx.css?v=1.0.0.2026.07.05" -->
+<link rel="stylesheet" href="sample-common.css?v=1.0.0.2026.07.12">
 <script src="./h-v-ams_ac_mx_calc.js?v=1.0.0.2026.07.05"></script>
 <script src="./h-v-ams_ac_mx_ui.js?v=1.0.0.2026.07.05"></script>
 </head>
 <body>
-<input type="hidden" id="AMS_AC_MX_Mode" data-autotable="true" value="0">
-<div class="BurdenRatio">
-保険負担割合:<select name="BurdenRatio" id="BurdenRatio">
-<option value="1">１割</option>
-<option value="2">２割</option>
-<option value="3">３割</option>
-<option value="10">全額(10割)</option>
-</select>
-負担で<input type="button" value="計算！" id="HomeVisitedOfMassage" onclick="HV_AMSACMX.modules.calc.api.runDrawTableCalc();">
-</div>
-<div id="tableArea"></div>
+<header>
+	<h1>訪問 鍼灸・あん摩マッサージ指圧負担金</h1>
+</header>
+<main id="HV-AMSACMX-App">
+	<input type="hidden" id="AMS_AC_MX_Mode" data-autotable="true" value="0">
+	<div class="BurdenRatio">
+	保険負担割合:<select name="BurdenRatio" id="BurdenRatio">
+	<option value="1">１割</option>
+	<option value="2">２割</option>
+	<option value="3">３割</option>
+	<option value="10">全額(10割)</option>
+	</select>
+	負担</div>
+	<div id="tableArea"></div>
+</main>
+<footer>
+	Powered by HV-AMS/AC/MX Project 
+	Practitioner-Led Stewardship License
+</footer>
 </body>
 </html>

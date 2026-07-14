@@ -2,9 +2,9 @@
 訪問鍼灸・あん摩マッサージ指圧料金シミュレーター
 
 English Name
-Home Visit Amma-Massage-Shiatsu, Acupuncture & Moxibustion Calculator
+ Home Visit Amma-Massage-Shiatsu, Acupuncture & Moxibustion Calculator
 
-Short Name
+Identifier
 h-v-ams_ac_mx_calc
 
 対象専門職
@@ -17,6 +17,11 @@ h-v-ams_ac_mx_calc
  (1). 対象専門職による個人事業
  (2). 対象専門職が議決権の過半数を保有する事業体
  (3). その他著作者又はメンテナーが認めた協力者
+
+本プロジェクトは、独立して事業を営む対象専門職への利用を主たる目的としていま
+す。このため、第三者の事業ブランド又は営業システムのもとで運営される事業につ
+いては、著作者又はメンテナーが別途認める場合を除き、無償利用対象とはなりませ
+ん。
 
 標準利用許諾料
 年額30,000円
