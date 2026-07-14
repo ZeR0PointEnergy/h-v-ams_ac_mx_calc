@@ -71,8 +71,11 @@ Webサーバー上に配置したHTMLから読み込んで利用します。外�
 ## ディレクトリ構成
 h-v-ams_ac_mx_calc/
 
+```text
 ├── h-v-ams_ac_mx_calc.js  …計算ロジック
 ├── h-v-ams_ac_mx_ui.js    …UI制御
+├── BodyAnatomy.css        … 解剖図表示用スタイルシート
+├── sample-common.css      … サンプル共通スタイル
 ├── sample-basic.html      …自動入力を使わずに展開したサンプル画面
 ├── sample-auto-form.html  …自動入力使用サンプル画面
 ├── sample-auto-table.html …自動表示一覧表のみサンプル画面
@@ -85,6 +88,13 @@ h-v-ams_ac_mx_calc/
 ├── LICENSE-PROJECT
 ├── NOTICE
 └── README.md
+```
+
+## オンラインデモ
+
+以下のページで実際の動作をご確認いただけます。
+
+https://dist.zpe.rest/HV-AMSACMX/index.html
 
 ## Quick Start
 
