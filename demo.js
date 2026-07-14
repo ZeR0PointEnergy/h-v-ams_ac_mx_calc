@@ -1,5 +1,5 @@
 /* 
- * デモンストレーション用スクリプト
+ * 繝�繝｢繝ｳ繧ｹ繝医Ξ繝ｼ繧ｷ繝ｧ繝ｳ逕ｨ繧ｹ繧ｯ繝ｪ繝励ヨ
  * Copyright 2026 Genjiro SAKAMAKI(Sorahara-Do)
  */
 
