@@ -1,10 +1,14 @@
 # 訪問鍼灸・あん摩マッサージ指圧料金シミュレーター
+
 **Project Name** 
 訪問鍼灸・あん摩マッサージ指圧料金シミュレーター
+
 **English Name**
  Home Visit Anma-Massage-Shiatsu, Acupuncture & Moxibustion Calculator
+
 **Project Abbreviation**
 HV-AMS/AC/MX Project
+
 **Identifier**
 h-v-ams_ac_mx_calc
 
@@ -43,6 +47,9 @@ Webサーバー上に配置したHTMLから読み込んで利用します。外�
 - Microsoft Edge バージョン 149.0.4022.98（公式ビルド）（64 ビット）
 - Brave（Chromium 149.0.7827.201ベース）
 - Firefox 152.0.3（64 ビット）
+- iPadOS 26.5
+ - iPad（第9世代）
+ - Safari
 
 ※ 上記以外の環境でも動作する可能性がありますが、未確認です。
 
@@ -74,8 +81,8 @@ h-v-ams_ac_mx_calc/
 ```text
 ├── h-v-ams_ac_mx_calc.js  …計算ロジック
 ├── h-v-ams_ac_mx_ui.js    …UI制御
-├── BodyAnatomy.css        … 解剖図表示用スタイルシート
-├── sample-common.css      … サンプル共通スタイル
+├── BodyAnatomy.css        …解剖図表示用スタイルシート
+├── sample-common.css      …サンプル共通スタイル
 ├── sample-basic.html      …自動入力を使わずに展開したサンプル画面
 ├── sample-auto-form.html  …自動入力使用サンプル画面
 ├── sample-auto-table.html …自動表示一覧表のみサンプル画面
@@ -100,11 +107,15 @@ https://dist.zpe.rest/HV-AMSACMX/index.html
 
 sample-basic.html、sample-auto-form.html、sample-full-auto.html、何れかのフ
 ァイル名を変更して、h-v-ams_ac_mx_calc.js、h-v-ams_ac_mx_ui.jsおよびcanvas.js
-を同一ディレクトリに置いてWebブラウザで読み込みます
+とCSSファイルBodyAnatomy.cssおよびsample-common.cssを同一ディレクトリに置い
+てWebブラウザで読み込みます
 
-sample-auto-table.htmlはh-v-ams_ac_mx_calc.js、h-v-ams_ac_mx_ui.jsを同一ディ
-レクトリに配置して使います（canvas.jsは使いません）
+sample-auto-table.htmlはh-v-ams_ac_mx_calc.js、h-v-ams_ac_mx_ui.jsと
+CSSファイルsample-common.cssを同一ディレクトリに配置して使います
+（canvas.jsは使いません）
 
+- BodyAnatomy.css … 人体図にフォーム部品を配置するためのCSS
+- sample-common.css … h1だけ小さい文字に変更する共通のCSS
 - sample-basic.html … 最小構成（フォーム用のタグは記載）
 - sample-auto-form.html … 自動フォーム生成
 - sample-auto-table.html … 一覧表のみ
@@ -134,12 +145,12 @@ sample-auto-table.htmlはh-v-ams_ac_mx_calc.js、h-v-ams_ac_mx_ui.jsを同一デ
 HTMLの <body> 終了タグ直前などで読み込んでください。
 依存関係がありますので記述する順番は上記の通りとしてください。
 
-- **h-v-ams_ac_mx_calc.js**（以下「CALC」）
+- **h-v-ams_ac_mx_calc.js**（以下 CALC）
   - 療養費計算ロジック
   - 公開API
   - 一部負担金計算
 
-- **h-v-ams_ac_mx_ui.js**（以下「UI」）
+- **h-v-ams_ac_mx_ui.js**（以下 UI）
   - 入力フォーム自動生成・監視（一部）
   - 負担金一覧表生成
   - UI制御
@@ -153,9 +164,11 @@ HTMLの <body> 終了タグ直前などで読み込んでください。
 ```html
 <input id="AMS_AC_MX_Mode">
 ```
+
 - value="0" ... あん摩マッサージ指圧とはりきゅう
 - value="1" ... あん摩マッサージ指圧
 - value="2" ... はりきゅう
+
 value属性がない場合やvalue属性の値を上記以外にしても無視して"0"モードとして動
 作する
 
@@ -166,29 +179,48 @@ value属性がない場合やvalue属性の値を上記以外にしても無視�
     id="AMS_AC_MX_Mode"
     data-autoform="true"
     data-autotable="true">
-```data-autoform="true"```
+```
+```html
+data-autoform="true"
+```
 value属性の値に応じてid属性"amsArea"若しくは"acmxArea"を持つタグに入力フォー
 ムを自動的に展開する
-```<div id="amsArea"></div>```
+```html
+<div id="amsArea"></div>
+```
 「あん摩マッサージ指圧」の５部位の<select>を展開する
-```<div id="acmxArea"></div>```
+```html
+<div id="acmxArea"></div>
+```
 「はりきゅう」の適応チェックボックスと術数の<select>を展開する
-```data-autotable="true"```
-```<div id="tableArea"></div>```
+```html
+data-autotable="true"
+```
+```
+<div id="tableArea"></div>
+```
 テーブル「負担金一覧表」を展開する
 
 ### 負担金一覧表の表示（CALC）
 テーブル「負担金一覧表」を展開するためには以下のid属性"tableArea"を持つタグが
 必須となる
-```<div id="tableArea"></div>```
+
+```html
+<div id="tableArea"></div>
+```
+
 また、負担割合を計算させるためにid属性"BurdenRatio"を持ちvalue属性で値を渡す
 必要がある
-```<select name="BurdenRatio" id="BurdenRatio">
+
+```html
+<select name="BurdenRatio" id="BurdenRatio">
 <option value="1">１割</option>
 <option value="2">２割</option>
 <option value="3">３割</option>
 <option value="10">全額(10割)</option>
-</select>```
+</select>
+```
+
 「全額負担（10割）」は制度上の施術料相当額を表示するための計算モードであり、
   自由診療等の保険外施術料金を示すものではありません。
 
@@ -196,12 +228,17 @@ value属性の値に応じてid属性"amsArea"若しくは"acmxArea"を持つタ
 id属性"AnswersBodyAnatomy"を持つタグに
 `利用者負担額(含訪問施術料)${Price}円/１回`
 として表示展開する
-```<div id="AnswersBodyAnatomy"></div>```
+
+```html
+<div id="AnswersBodyAnatomy"></div>
+```
 
 負担割合を計算させるためにid属性"BurdenRatio"を持ちvalue属性で値を渡すことに
 加え、１建物当たりの人数をid属性"HeadCount"を持ちvalue属性で値を渡す必要があ
 る
-```<select name="BurdenRatio" id="BurdenRatio">
+
+```html
+<select name="BurdenRatio" id="BurdenRatio">
 <option value="1">１割</option>
 <option value="2">２割</option>
 <option value="3">３割</option>
@@ -215,20 +252,29 @@ id属性"AnswersBodyAnatomy"を持つタグに
 <option value="10">１０～１９人</option>
 <option value="20">２０人以上</option>
 <option value="0">訪問施術料含まない</option>
-</select>```
+</select>
+```
+
 id属性"HeadCount"のvalue値は現在の制度下に合わせて表記しています
-value="10" ・・・10?19人
+value="10" ・・・10～19人
 value="20" ・・・20人以上
-10?19人の場合は、その範囲であれば適正な同じ値を返します
+10～19人の場合は、その範囲であれば適正な同じ値を返します
 value値は"20"を上限とし21人以上の場合でも"20"としてください
 
 ### javascript公開関数
 #### 負担金計算の実行と負担金一覧表（CALC）
+
 ```javascript
 HV_AMSACMX.modules.calc.api.runCalculator() 
 ```
+
 療養費（一部負担金）計算および療養費（一部負担金）一覧表の更新を行います。
-簡易呼び出し（互換API） ```runCalculator() ```
+
+簡易呼び出し（互換API）:
+
+```javascript
+runCalculator()
+```
 
 #### 療養費計算の実行のみ（CALC）
 
@@ -236,7 +282,12 @@ HV_AMSACMX.modules.calc.api.runCalculator()
 HV_AMSACMX.modules.calc.api.runOnSiteCalc() 
 ```
 療養費計算（一部負担金）の実行のみ更新を行います。
-簡易呼び出し（互換API） ```runOnSiteCalc() ```
+
+簡易呼び出し（互換API）:
+
+```javascript
+runOnSiteCalc()
+```
 
 #### 療養費一覧表のみ更新（CALC）
 
@@ -244,14 +295,24 @@ HV_AMSACMX.modules.calc.api.runOnSiteCalc()
 HV_AMSACMX.modules.calc.api.runDrawTableCalc() 
 ```
 療養費（一部負担金）一覧表のみを更新します。
-簡易呼び出し（互換API） ```runDrawTableCalc() ```
+
+簡易呼び出し（互換API）:
+
+```javascript
+runDrawTableCalc()
+```
 
 #### 負担金計算の実行と負担金一覧表（CALC・UI）
+
 ```javascript
 HV_AMSACMX.modules.ui.api.runModeUI() 
 ```
 療養費（一部負担金）計算および療養費（一部負担金）一覧表の更新を行います。
-簡易呼び出し（互換API） ```runModeUI() ```
+
+簡易呼び出し（互換API）:
+```javascript
+runModeUI()
+```
 
 ## 計算内容
 
@@ -273,6 +334,19 @@ HV_AMSACMX.modules.ui.api.runModeUI()
 - 電気温罨法
 - はりきゅう
 - 電療料
+
+## HTML・CSSについて
+
+本プロジェクトで提供するサンプルHTMLおよびCSSは、料金シミュレーターの利用例
+を示すためのものです。
+
+設置するWebサイトの構成やデザインに合わせて、HTMLおよびCSSは自由に変更して
+利用できます。
+
+JavaScript本体との連携に必要な要素（ID等）を維持することで、既存のWebサイト
+へ組み込むことができます。
+
+ただし、サンプルに含まれる第三者著作物についてはNOTICEを参照してください。
 
 ## 更新方針
 本プロジェクトは、療養費制度の改定、関係通知の変更、不具合修正、機能追加等に
