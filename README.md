@@ -2,7 +2,7 @@
 **Project Name** 
 訪問鍼灸・あん摩マッサージ指圧料金シミュレーター
 **English Name**
- Home Visit Amma-Massage-Shiatsu, Acupuncture & Moxibustion Calculator
+ Home Visit Anma-Massage-Shiatsu, Acupuncture & Moxibustion Calculator
 **Project Abbreviation**
 HV-AMS/AC/MX Project
 **Identifier**
@@ -10,7 +10,7 @@ h-v-ams_ac_mx_calc
 
 ## プロジェクト概要
 
-訪問鍼灸・あん摩マッサージ指圧料金シミュレーター（Home Visit Amma-Massage-Sh
+訪問鍼灸・あん摩マッサージ指圧料金シミュレーター（Home Visit Anma-Massage-Sh
 iatsu, Acupuncture & Moxibustion Calculator、略称 h-v-ams_ac_mx_calc）は、受
 領委任制度下の療養費に基づく訪問あん摩マッサージ指圧・はり・きゅうの施術料を
 Webブラウザ上で試算するJavaScriptプログラムです。

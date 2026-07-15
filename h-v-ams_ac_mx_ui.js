@@ -1,5 +1,5 @@
 /* 
- * Home Visit AmmaMassageShiatsu & ACupuncture & MoXibustion Calculator 
+ * Home Visit AnmaMassageShiatsu & ACupuncture & MoXibustion Calculator 
  * Developed to support licensed practitioners and related organizations.
  * Licensed under the Practitioner-Led Stewardship License (PLSL) Version 1.0.
  *
