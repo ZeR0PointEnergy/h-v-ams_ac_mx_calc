@@ -2,8 +2,8 @@
 
 ## API Reference
 
-–{Џ‘‚Н h-v-ams_ac_mx_calc ‚ЄЊцЉJ‚·‚й JavaScript API ‚р’и‹`‚·‚й.
-“а•”ЋА‘•‚Ё‚ж‚СђЭЊv‚Й‚В‚ў‚Д‚Н SPEC.md ‚рЋQЏЖ‚·‚й.
+жњ¬ж›ёгЃЇ h-v-ams_ac_mx_calc гЃЊе…¬й–‹гЃ™г‚‹ JavaScript API г‚’е®љзѕ©гЃ™г‚‹.
+е†…йѓЁе®џиЈ…гЃЉг‚€гЃіиЁ­иЁ€гЃ«гЃ¤гЃ„гЃ¦гЃЇ SPEC.md г‚’еЏ‚з…§гЃ™г‚‹.
 
 This document describes the public JavaScript API provided by
 h-v-ams_ac_mx_calc.
@@ -12,7 +12,7 @@ For internal design, data structures and HTML Contract,
 see SPEC.md.
 
 ### Project
-    –K–виI‹„ѓ}ѓbѓTЃ[ѓW—ї‹аѓVѓ~ѓ…ѓЊЃ[ѓ^Ѓ[
+    иЁЄе•ЏйЌјзЃёгѓћгѓѓг‚µгѓјг‚ёж–™й‡‘г‚·гѓџгѓҐгѓ¬гѓјг‚їгѓј
 
 ### Short Name
     h-v-ams_ac_mx_calc
@@ -40,7 +40,7 @@ window.HV_AMSACMX
 
 ```Tree
 window
- „¤„џ„џ HV_AMSACMX
+ в””в”Ђв”Ђ HV_AMSACMX
         version
         config
         modules
