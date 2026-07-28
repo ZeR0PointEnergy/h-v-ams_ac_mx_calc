@@ -27,6 +27,17 @@ HTMLから読み込むだけで利用できます。外部ライブラリやサ�
 ありません。動作確認用のサンプルHTMLも添付しているため、そのまま料金シミュレ
 ーターとして利用することも、既存のWebページへ組み込むことも可能です。
 
+## ドキュメント (Documentation)
+
+README.md
+    プロジェクト概要・利用方法 (Project Overview)
+
+API.md
+    公開JavaScript API仕様 (Public API Reference)
+
+SPEC.md
+    内部設計仕様 (Internal Design Specification)
+
 ## システム要件
 
 ### 必要な環境
@@ -84,6 +95,8 @@ h-v-ams_ac_mx_calc/
 ├── BodyAnatomy.css        …解剖図表示用スタイルシート
 ├── sample-common.css      …サンプル共通スタイル
 ├── sample-basic.html      …自動入力を使わずに展開したサンプル画面
+├── sample-compact.html    …携帯電話などのモバイル端末サンプル画面
+├── sample-compact.css     …sample-compact.html用のスタイルシート
 ├── sample-auto-form.html  …自動入力使用サンプル画面
 ├── sample-auto-table.html …自動表示一覧表のみサンプル画面
 ├── sample-full-auto.html  …モード切替つき自動入力表示のサンプル画面
@@ -94,6 +107,8 @@ h-v-ams_ac_mx_calc/
 ├── LICENSE
 ├── LICENSE-PROJECT
 ├── NOTICE
+├── API.md
+├── SPEC.md
 └── README.md
 ```
 
@@ -116,7 +131,9 @@ CSSファイルsample-common.cssを同一ディレクトリに配置して使い
 
 - BodyAnatomy.css … 人体図にフォーム部品を配置するためのCSS
 - sample-common.css … h1だけ小さい文字に変更する共通のCSS
+- sample-compact.css … sample-compact.html用のスタイルシート
 - sample-basic.html … 最小構成（フォーム用のタグは記載）
+- sample-compact.html … 携帯電話などのモバイル端末サンプル画面
 - sample-auto-form.html … 自動フォーム生成
 - sample-auto-table.html … 一覧表のみ
 - sample-full-auto.html … フル機能
@@ -174,6 +191,7 @@ value属性がない場合やvalue属性の値を上記以外にしても無視�
 
 ### UIコントロールのモード（CALC・UI）
 入力UI設置補助のために"true"を指定することで機能を持たせることもできる
+
 ```html
 <input 
     id="AMS_AC_MX_Mode"
@@ -183,16 +201,22 @@ value属性がない場合やvalue属性の値を上記以外にしても無視�
 ```html
 data-autoform="true"
 ```
+
 value属性の値に応じてid属性"amsArea"若しくは"acmxArea"を持つタグに入力フォー
 ムを自動的に展開する
+
 ```html
 <div id="amsArea"></div>
 ```
+
 「あん摩マッサージ指圧」の５部位の<select>を展開する
+
 ```html
 <div id="acmxArea"></div>
 ```
+
 「はりきゅう」の適応チェックボックスと術数の<select>を展開する
+
 ```html
 data-autotable="true"
 ```
@@ -281,6 +305,7 @@ runCalculator()
 ```javascript
 HV_AMSACMX.modules.calc.api.runOnSiteCalc() 
 ```
+
 療養費計算（一部負担金）の実行のみ更新を行います。
 
 簡易呼び出し（互換API）:
@@ -294,6 +319,7 @@ runOnSiteCalc()
 ```javascript
 HV_AMSACMX.modules.calc.api.runDrawTableCalc() 
 ```
+
 療養費（一部負担金）一覧表のみを更新します。
 
 簡易呼び出し（互換API）:
@@ -307,9 +333,11 @@ runDrawTableCalc()
 ```javascript
 HV_AMSACMX.modules.ui.api.runModeUI() 
 ```
+
 療養費（一部負担金）計算および療養費（一部負担金）一覧表の更新を行います。
 
 簡易呼び出し（互換API）:
+
 ```javascript
 runModeUI()
 ```
@@ -317,8 +345,11 @@ runModeUI()
 ## 計算内容
 
 利用者様の負担額を表示するために以下の計算を行っている
+
 ### 療養費計算：
-( 施術料 + 訪問施術料 ) / 負担割合計算 = 一部負担金
+
+( 施術料 + 訪問施術料 ) × 負担割合 = 一部負担金
+
 - マッサージ
 - 変形徒手矯正
 - はりきゅう
@@ -327,7 +358,9 @@ runModeUI()
 
 表では以下が表示している
 訪問施術料がどこにかかるかということと分けて考えたため一覧表には含めていない
-施術料 / 負担割合計算 = 一部負担金
+
+施術料 × 負担割合 = 一部負担金
+
 - マッサージ
 - 変形徒手矯正
 - 温罨法
@@ -345,6 +378,10 @@ runModeUI()
 
 JavaScript本体との連携に必要な要素（ID等）を維持することで、既存のWebサイト
 へ組み込むことができます。
+
+JavaScriptとの連携にはHTML Contractで定義されたid属性を維持してください。
+
+詳細はSPEC.mdを参照してください。
 
 ただし、サンプルに含まれる第三者著作物についてはNOTICEを参照してください。
 

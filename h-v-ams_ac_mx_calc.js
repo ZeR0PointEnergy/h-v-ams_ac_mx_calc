@@ -186,8 +186,6 @@ function AMSCountParts(){
 
 function AMSPrice(arrLimb){
     let Price = 0;
-    // JavaScriptっぽい書き方らしいが、苦手なので元のコードも残す
-    // (arrLimb.every(value => value ===0))
     // (arrLimb[0] === 0 && arrLimb[1] === 0 && arrLimb[2] === 0 && arrLimb[3] === 0 && arrLimb[4] === 0) で同じ
     if (arrLimb.every(v => v === 0))
         return 0;

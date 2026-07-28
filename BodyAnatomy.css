@@ -25,83 +25,124 @@
  * 人体部位選択
  */
 
-#HV-AMSACMX-App label.rightUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 306px;   /* 任意の位置に調整 */
-            left: 138px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-#HV-AMSACMX-App select.rightUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 330px;   /* 任意の位置に調整 */
-            left: 118px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
+#HV-AMSACMX-App #amsArea label{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    z-index:10;
+}
+
+#HV-AMSACMX-App label.rightUpperLimb{
+	position:absolute; /* コンテナ内で絶対配置 */
+	top:306px;   /* 任意の位置に調整 */
+	left:118px;  /* 任意の位置に調整 */
+	width:120px;
+	height:52px;
+	z-index: 10; /* canvasより前面に表示 */
+}
+
+#HV-AMSACMX-App label.rightUpperLimb > span{
+	position:absolute;
+	left:20px;
+	top:0;
+}
+
+#HV-AMSACMX-App label.rightUpperLimb > select{
+	position:absolute;
+	left:0;
+	top:24px;
+}
+
 #HV-AMSACMX-App label.leftUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 306px;   /* 任意の位置に調整 */
-            left: 414px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-#HV-AMSACMX-App select.leftUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 330px;   /* 任意の位置に調整 */
-            left: 394px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
+	position: absolute; /* コンテナ内で絶対配置 */
+	top: 306px;   /* 任意の位置に調整 */
+	left: 384px;  /* 任意の位置に調整 */
+	width:120px;
+	height:52px;
+	z-index: 10; /* canvasより前面に表示 */
+}
+
+#HV-AMSACMX-App label.leftUpperLimb > span{
+	position:absolute;
+	left:20px;
+	top:0;
+}
+
+#HV-AMSACMX-App label.leftUpperLimb > select{
+	position:absolute;
+	left:0;
+	top:24px;
+}
+
 #HV-AMSACMX-App label.rightLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 436px;   /* 任意の位置に調整 */
-            left: 178px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-#HV-AMSACMX-App select.rightLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 460px;   /* 任意の位置に調整 */
-            left: 158px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
+	position: absolute; /* コンテナ内で絶対配置 */
+	top: 436px;   /* 任意の位置に調整 */
+	left: 178px;  /* 任意の位置に調整 */
+	width:120px;
+	height:52px;
+	z-index: 10; /* canvasより前面に表示 */
+}
+
+#HV-AMSACMX-App label.rightLowerLimb > span{
+	position:absolute;
+	left:20px;
+	top:0;
+}
+
+#HV-AMSACMX-App label.rightLowerLimb > select{
+	position:absolute;
+	left:0;
+	top:24px;
+}
+
 #HV-AMSACMX-App label.leftLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 436px;   /* 任意の位置に調整 */
-            left: 374px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-#HV-AMSACMX-App select.leftLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 460px;   /* 任意の位置に調整 */
-            left: 354px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
+	position: absolute; /* コンテナ内で絶対配置 */
+	top: 436px;   /* 任意の位置に調整 */
+	left: 334px;  /* 任意の位置に調整 */
+	width:120px;
+	height:52px;
+	z-index: 10; /* canvasより前面に表示 */
+}
+
+#HV-AMSACMX-App label.leftLowerLimb > span{
+	position:absolute;
+	left:20px;
+	top:0;
+}
+
+#HV-AMSACMX-App label.leftLowerLimb > select{
+	position:absolute;
+	left:0;
+	top:24px;
+}
+
 #HV-AMSACMX-App label.bodyTrunk {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 336px;   /* 任意の位置に調整 */
-            left: 285px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-#HV-AMSACMX-App select.bodyTrunk {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 360px;   /* 任意の位置に調整 */
-            left: 260px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
+	position: absolute; /* コンテナ内で絶対配置 */
+	top: 336px;   /* 任意の位置に調整 */
+	left: 255px;  /* 任意の位置に調整 */
+	width:120px;
+	height:52px;
+	z-index: 10; /* canvasより前面に表示 */
+}
+
+#HV-AMSACMX-App label.bodyTrunk > span{
+	position:absolute;
+	left:20px;
+	top:0;
+}
+
+#HV-AMSACMX-App label.bodyTrunk > select{
+	position:absolute;
+	left:0;
+	top:24px;
+}
 
 #HV-AMSACMX-App fieldset#IndicateAcMx {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 520px;   /* 任意の位置に調整 */
-            left: 400px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
+	position: absolute; /* コンテナ内で絶対配置 */
+	top: 520px;   /* 任意の位置に調整 */
+	left: 400px;  /* 任意の位置に調整 */
+	z-index: 10; /* canvasより前面に表示 */
+}
 
 #HV-AMSACMX-App #AMS_AC_MX_Mode {
             position: absolute; /* コンテナ内で絶対配置 */

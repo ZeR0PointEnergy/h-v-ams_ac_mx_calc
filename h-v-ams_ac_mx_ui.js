@@ -15,7 +15,7 @@
     });
     
     HV_AMSACMX.config ??= {
-        debug: false
+        debug: true
     };
     
     HV_AMSACMX.modules ??= {};
@@ -49,8 +49,8 @@ const LimbTechnique = Object.freeze({
 
 const AMStechniqueOptions   = Object.freeze([
     { value : LimbTechnique.NONE, text : "なし" },
-    { value: LimbTechnique.MASSAGE, text: "マッサージ" },
-    { value: LimbTechnique.CORRECTION, text: "変形徒手" }
+    { value : LimbTechnique.MASSAGE, text: "マッサージ" },
+    { value : LimbTechnique.CORRECTION, text: "変形徒手" }
 ]);
 
 const ACMXIndicateCase = Object.freeze([
@@ -124,32 +124,32 @@ function updateACMXTecState() {
  * id="amsArea"のタグを基準に
  * あん摩マッサージ指圧の5部位<select>を描く
  */
-function createAMSUI()
-{
+function createAMSUI() {
     const amsArea = document.getElementById(HtmlId.amsArea);
     if (!amsArea) {
         console.error("amsArea not found.");
         return;
     }
+
     for (const [nIndex, limb] of LimbInfo.entries()) {
         const objLabel = document.createElement("label");
+        objLabel.className = limb.key;
+        const objSpan = document.createElement("span");
+        objSpan.textContent = limb.label;
         const objSelect = document.createElement("select");
         objSelect.id = `limb[${nIndex}]`;
         objSelect.name = limb.key;
         objSelect.className = limb.key;
-        objLabel.htmlFor = objSelect.id;
-        objLabel.className = limb.key;
-        objLabel.textContent = limb.label;
-        for (const optionInfo of AMStechniqueOptions ) {
-            if (!limb.correction && optionInfo.value === 3)
+        for (const optionInfo of AMStechniqueOptions) {
+            if (!limb.correction && optionInfo.value === LimbTechnique.CORRECTION)
                 continue;
             const objOption = document.createElement("option");
             objOption.value = optionInfo.value;
             objOption.textContent = optionInfo.text;
             objSelect.appendChild(objOption);
         }
+        objLabel.append(objSpan, objSelect);
         amsArea.appendChild(objLabel);
-        amsArea.appendChild(objSelect);
     }
 }
 

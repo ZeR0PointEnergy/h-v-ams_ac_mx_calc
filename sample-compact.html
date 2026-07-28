@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>訪問 鍼灸・あん摩マッサージ指圧料金シミュレーター</title>
+<meta name="description" content="訪問 鍼灸・あん摩マッサージ指圧 療養費/一部負担金 料金計算シミュレーター">
+<meta name="author" content="HV-AMS/AC/MX Project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="sample-common.css?v=1.0.0.2026.07.12">
+<link rel="stylesheet" href="sample-compact.css?v=1.0.0.2026.07.12">
+<script src="./h-v-ams_ac_mx_calc.js?v=1.0.0.2026.07.12"></script>
+<script src="./h-v-ams_ac_mx_ui.js?v=1.0.0.2026.07.12"></script>
+</head>
+<body>
+<header>
+	<h1>訪問 鍼灸・あん摩マッサージ指圧料金シミュレーター</h1>
+</header>
+<main id="HV-AMSACMX-App">
+	<select id="AMS_AC_MX_Mode" data-autoform="true">
+	<option value="0">マッサージ+はり+きゅう</option>
+	<option value="1">マッサージ</option>
+	<option value="2">はり+きゅう</option>
+	</select>
+	<ul>
+	<li>あんまマッサージ指圧
+	<ul>
+	<li>痛みやしびれで「マッサージ」希望部位を選ぶ
+	<li>拘縮や筋麻痺もある場合は「変形徒手矯正」を選ぶ
+	<li>肩・股関節を挟む各肢は体躯のを「マッサージ」も追加を推奨
+	</ul>
+	<li>はり＆きゅう
+	<ul>
+	<li>鍼灸の適応症を選択する（複数可）
+	<li>「その他」は医師の同意書に記載された慢性疼痛等
+	<li>１術は鍼灸何れか、２術は両方（希望がかなわない場合もあり）
+	</ul>
+	<li>医療保険の保険負担割合を選ぶ
+	<li>[計算]ボタンを押す
+	</ul>
+	<div id="amsArea"></div>
+	<div id="acmxArea"></div>
+	保険負担割合:
+	<select id="BurdenRatio">
+	<option value="1">１割</option>
+	<option value="2">２割</option>
+	<option value="3">３割</option>
+	<option value="10">全額(10割)</option>
+	</select>負担で
+	<input type="button" value="計算" id="HomeVisitedOfMassage" onclick="runCalculator();">
+	<br>
+	同一住所のご利用者人数:
+	<select id="HeadCount">
+	<option value="1">ご自宅</option>
+	<option value="1">１人</option>
+	<option value="2">２人</option>
+	<option value="3">３～９人</option>
+	<option value="10">１０～１９人</option>
+	<option value="20">２０人以上</option>
+	<option value="0">
+	訪問施術料含まない
+	</option>
+	</select>
+	<div id="AnswersBodyAnatomy"></div>
+	<div id="tableArea"></div>
+</main>
+<footer>
+	Powered by HV-AMS/AC/MX Project 
+	Practitioner-Led Stewardship License
+</footer>
+</body>
+</html>

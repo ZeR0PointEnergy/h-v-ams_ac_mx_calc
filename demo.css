@@ -1,120 +1,120 @@
-        .BodyAnatomy {
-            position: relative; /* 親要素を基準に配置 */
-            width: 600px;
-            height: 830px;
-            border: 1px solid black;
-        }
-        canvas {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 0;
-            left: 0;
-        }
-        label.rightUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 336px;   /* 任意の位置に調整 */
-            left: 138px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        select.rightUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 360px;   /* 任意の位置に調整 */
-            left: 118px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        label.leftUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 336px;   /* 任意の位置に調整 */
-            left: 414px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        select.leftUpperLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 360px;   /* 任意の位置に調整 */
-            left: 394px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        label.rightLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 456px;   /* 任意の位置に調整 */
-            left: 178px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        select.rightLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 480px;   /* 任意の位置に調整 */
-            left: 158px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        label.leftLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 456px;   /* 任意の位置に調整 */
-            left: 374px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        select.leftLowerLimb {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 480px;   /* 任意の位置に調整 */
-            left: 354px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        label.bodyTrunk {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 346px;   /* 任意の位置に調整 */
-            left: 295px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        select.bodyTrunk {
-            text-align: center;
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 370px;   /* 任意の位置に調整 */
-            left: 270px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        #IndicateAcMx {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 520px;   /* 任意の位置に調整 */
-            left: 480px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        fieldset#IndicateAcMx {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 520px;   /* 任意の位置に調整 */
-            left: 400px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        div.BurdenRatio {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 20px;   /* 任意の位置に調整 */
-            left: 20px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        #AnswersBodyAnatomy{
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 400px;
-            left: 20px;
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        #AMS_AC_MX_Mode {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 20px;   /* 任意の位置に調整 */
-            left: 400px;  /* 任意の位置に調整 */
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        #tableArea {
-            position: absolute; /* コンテナ内で絶対配置 */
-            top: 500px;
-            left: 20px;
-            z-index: 10; /* canvasより前面に表示 */
-        }
-        #tableArea table {
-            border-collapse: collapse;
-        }
+.BodyAnatomy {
+    position: relative; /* 親要素を基準に配置 */
+    width: 600px;
+    height: 830px;
+    border: 1px solid black;
+}
+canvas {
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 0;
+    left: 0;
+}
+label.rightUpperLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 336px;   /* 任意の位置に調整 */
+    left: 138px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+select.rightUpperLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 360px;   /* 任意の位置に調整 */
+    left: 118px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+label.leftUpperLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 336px;   /* 任意の位置に調整 */
+    left: 414px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+select.leftUpperLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 360px;   /* 任意の位置に調整 */
+    left: 394px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+label.rightLowerLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 456px;   /* 任意の位置に調整 */
+    left: 178px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+select.rightLowerLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 480px;   /* 任意の位置に調整 */
+    left: 158px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+label.leftLowerLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 456px;   /* 任意の位置に調整 */
+    left: 374px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+select.leftLowerLimb {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 480px;   /* 任意の位置に調整 */
+    left: 354px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+label.bodyTrunk {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 346px;   /* 任意の位置に調整 */
+    left: 295px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+select.bodyTrunk {
+    text-align: center;
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 370px;   /* 任意の位置に調整 */
+    left: 270px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+#IndicateAcMx {
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 520px;   /* 任意の位置に調整 */
+    left: 480px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+fieldset#IndicateAcMx {
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 520px;   /* 任意の位置に調整 */
+    left: 400px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+div.BurdenRatio {
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 20px;   /* 任意の位置に調整 */
+    left: 20px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+#AnswersBodyAnatomy{
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 400px;
+    left: 20px;
+    z-index: 10; /* canvasより前面に表示 */
+}
+#AMS_AC_MX_Mode {
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 20px;   /* 任意の位置に調整 */
+    left: 400px;  /* 任意の位置に調整 */
+    z-index: 10; /* canvasより前面に表示 */
+}
+#tableArea {
+    position: absolute; /* コンテナ内で絶対配置 */
+    top: 500px;
+    left: 20px;
+    z-index: 10; /* canvasより前面に表示 */
+}
+#tableArea table {
+    border-collapse: collapse;
+}

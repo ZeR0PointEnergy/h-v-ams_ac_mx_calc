@@ -1,0 +1,9 @@
+#amsArea label{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:1rem;
+}
+
+#amsArea select{
+    width:100%;
+}
